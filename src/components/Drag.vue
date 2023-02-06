@@ -55,17 +55,20 @@ const handleMouseDown = (e) => {
   shift.value.x = e.clientX - xOffset;
   shift.value.y = e.clientY - yOffset;
 
+  console.log(e);
+
   isMouse.value = true;
 };
 const handleMouseMove = (e) => {
-  console.log(isMouse.value && !isResize.valu);
   if (isMouse.value && !isResize.value) {
+    console.log(e);
     const left = e.clientX - shift.value.x;
     const top = e.clientY - shift.value.y;
 
     xOffset = left;
     yOffset = top;
     style.value.transform = `translate(${left}px, ${top}px)`;
+  } else if (isResize.value) {
   }
 };
 const handleMouseDownResize = (e) => {
@@ -132,8 +135,7 @@ onMounted(() => {
         }
         if (width > minimum_size) {
           style.value.width = width + "px";
-          style.value.transform =
-            original_x + (e.pageX - original_mouse_x) + "px";
+          style.value.left = original_x + (e.pageX - original_mouse_x) + "px";
         }
       } else if (currentResizer.classList.contains("top-right")) {
         const width = original_width + (e.pageX - original_mouse_x);
@@ -143,18 +145,18 @@ onMounted(() => {
         }
         if (height > minimum_size) {
           style.value.height = height + "px";
-          // style.value.top = original_y + (e.pageY - original_mouse_y) + "px";
+          style.value.top = original_y + (e.pageY - original_mouse_y) + "px";
         }
       } else {
         const width = original_width - (e.pageX - original_mouse_x);
         const height = original_height - (e.pageY - original_mouse_y);
         if (width > minimum_size) {
           style.value.width = width + "px";
-          // style.value.left = original_x + (e.pageX - original_mouse_x) + "px";
+          style.value.left = original_x + (e.pageX - original_mouse_x) + "px";
         }
         if (height > minimum_size) {
           style.value.height = height + "px";
-          // style.value.top = original_y + (e.pageY - original_mouse_y) + "px";
+          style.value.top = original_y + (e.pageY - original_mouse_y) + "px";
         }
       }
     }
@@ -174,7 +176,6 @@ onUnmounted(() => {
   background: #000;
   border: 1px solid black;
   resize: both;
-  position: absolute;
   user-select: none;
 
   .resizers {
