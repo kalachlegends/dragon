@@ -1,5 +1,6 @@
 <script setup>
 import Drag from "./components/Drag.vue";
+import { ref } from "vue";
 </script>
 
 <template>
@@ -12,8 +13,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 1200px;
+  height: 1200px;
 }
 #app {
-  height: 100%;
+  width: 1200px;
+  height: 1200px;
 }
 </style>
