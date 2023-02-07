@@ -61,14 +61,12 @@ const handleMouseDown = (e) => {
 };
 const handleMouseMove = (e) => {
   if (isMouse.value && !isResize.value) {
-    console.log(e);
     const left = e.clientX - shift.value.x;
     const top = e.clientY - shift.value.y;
 
     xOffset = left;
     yOffset = top;
     style.value.transform = `translate(${left}px, ${top}px)`;
-  } else if (isResize.value) {
   }
 };
 const handleMouseDownResize = (e) => {
@@ -176,6 +174,7 @@ onUnmounted(() => {
   background: #000;
   border: 1px solid black;
   resize: both;
+  position: absolute;
   user-select: none;
 
   .resizers {
